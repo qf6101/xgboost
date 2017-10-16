@@ -1,4 +1,4 @@
-I made 2 modifications to xgboost as follows.
+I did some modifications to xgboost as follows.
 ===========
 
 (1) Extend the precision of dump model to 10 fix digits for [quickscorer](https://github.com/qf6101/quickscorer)'s model loading.
