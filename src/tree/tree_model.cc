@@ -6,6 +6,7 @@
 #include <xgboost/tree_model.h>
 #include <sstream>
 #include "./param.h"
+#include <limits>
 
 namespace xgboost {
 // register tree parameter
@@ -20,6 +21,7 @@ void DumpRegTree(std::stringstream& fo,  // NOLINT(*)
                  const FeatureMap& fmap,
                  int nid, int depth, int add_comma,
                  bool with_stats, std::string format) {
+  fo.precision(std::numeric_limits<float>::max_digits10);
   if (format == "json") {
     if (add_comma) fo << ",";
     if (depth != 0) fo << std::endl;
@@ -36,7 +38,7 @@ void DumpRegTree(std::stringstream& fo,  // NOLINT(*)
       }
       fo << " }";
     } else {
-      fo << nid << ":leaf=" << tree[nid].leaf_value();
+      fo << nid << ":leaf=" << std::fixed << tree[nid].leaf_value();
       if (with_stats) {
         fo << ",cover=" << tree.stat(nid).sum_hess;
       }
@@ -92,7 +94,7 @@ void DumpRegTree(std::stringstream& fo,  // NOLINT(*)
                << ", \"no\": " << tree[nid].cright()
                << ", \"missing\": " << tree[nid].cdefault();
           } else {
-            fo << nid << ":[" << fmap.name(split_index) << "<" << cond
+            fo << nid << ":[" << fmap.name(split_index) << "<" << std::fixed << cond
                << "] yes=" << tree[nid].cleft()
                << ",no=" << tree[nid].cright()
                << ",missing=" << tree[nid].cdefault();
@@ -111,7 +113,7 @@ void DumpRegTree(std::stringstream& fo,  // NOLINT(*)
            << ", \"no\": " << tree[nid].cright()
            << ", \"missing\": " << tree[nid].cdefault();
       } else {
-        fo << nid << ":[f" << split_index << "<"<< cond
+        fo << nid << ":[f" << split_index << "<"<< std::fixed << cond
            << "] yes=" << tree[nid].cleft()
            << ",no=" << tree[nid].cright()
            << ",missing=" << tree[nid].cdefault();
