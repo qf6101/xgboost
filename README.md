@@ -1,3 +1,14 @@
+I made 2 modifications to xgboost as follows.
+===========
+
+(1) Extend the precision of dump model to 10 fix digits for [quickscorer](https://github.com/qf6101/quickscorer)'s model loading.
+
+https://github.com/qf6101/xgboost/commit/324d0346c5bfdd1f48b8f1f8d1968ed89774a27d
+
+(2) Fix bug in prediction function with [issue](https://github.com/dmlc/xgboost/issues/2781).
+
+https://github.com/qf6101/xgboost/commit/93bc279b714ed34ecd7667f9e8f7a11d7652683b
+
 <img src=https://raw.githubusercontent.com/dmlc/dmlc.github.io/master/img/logo-m/xgboost.png width=135/>  eXtreme Gradient Boosting
 ===========
 [![Build Status](https://travis-ci.org/dmlc/xgboost.svg?branch=master)](https://travis-ci.org/dmlc/xgboost)
